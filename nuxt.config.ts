@@ -4,31 +4,13 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss'
   ],
 
-  // ESTO ES LO MÁS IMPORTANTE PARA VERCEL
   build: {
-    transpile: ['three']
+    transpile: ['three', 'chess.js']
   },
-
-  // Evita que Nuxt intente renderizar Three.js en el servidor durante el build
-  ssr: true, // Puedes mantenerlo en true, pero el componente DEBE estar en ClientOnly
 
   vite: {
     optimizeDeps: {
-      include: ['three', 'chess.js']
-    },
-    build: {
-      // Aumenta el límite de advertencia de tamaño de chunk
-      chunkSizeWarningLimit: 1500,
+      include: ['chess.js', 'three']
     }
-  },
-
-  // Desactiva el pre-renderizado automático para evitar errores de rutas
-  nitro: {
-    prerender: {
-      crawlLinks: false,
-      routes: ['/']
-    }
-  },
-
-  compatibilityDate: '2024-04-03'
+  }
 })
